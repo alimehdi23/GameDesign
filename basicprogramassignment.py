@@ -7,4 +7,4 @@ print x - y
 print x/y
 print x * y
 print y + 4
-y > x
+print y > x
