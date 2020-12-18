@@ -20,7 +20,7 @@ def text_format(message, textFont, textSize, textColor):
     return newText
 
 
-# Colors
+# Colors for the code
 white=(255, 255, 255)
 black=(0, 0, 0)
 gray=(50, 50, 50)
@@ -29,7 +29,7 @@ green=(0, 255, 0)
 blue=(0, 0, 255)
 yellow=(255, 255, 0)
 
-# Game Fonts
+# Game Font basic font
 font = pygame.font.get_default_font()
 
 # Main Menu
@@ -52,6 +52,8 @@ def main_menu():
                     if selected=="start":
                         print("Start")
                         # initializing values
+                        # start of code for game
+                        #this is for size
                         SCREEN_WIDTH = 800
                         SCREEN_HEIGHT = 400
                         SQUARE_SIZE = 50
@@ -61,10 +63,10 @@ def main_menu():
                         X_MARGIN = (SCREEN_WIDTH - (BOARD_WIDTH * (SQUARE_SIZE + SQUARE_GAP))) // 2
                         Y_MARGIN = (SCREEN_HEIGHT - (BOARD_HEIGHT * (SQUARE_SIZE + SQUARE_GAP))) // 2
 
-                        # the board size must be even due to pairs
+                        # the board size must be even due to pairs because they have to match
                         assert (BOARD_HEIGHT * BOARD_WIDTH) % 2 == 0, 'The board size must be even'
 
-                        # the shapes
+                        # the shapes used for matching
                         DIAMOND = 'diamond'
                         SQUARE = 'square'
                         TRIANGLE = 'triangle'
@@ -79,7 +81,6 @@ def main_menu():
 
                         # function at the sart of the game
                         def start_game_animation(board):
-                            """Starts game by randomly showing 5 squares"""
 
                             coordinates = list(product(range(BOARD_HEIGHT), range(BOARD_WIDTH)))
                             random.shuffle(coordinates)
@@ -90,16 +91,6 @@ def main_menu():
                             draw_board(board, revealed)
                             pygame.display.update()
                             pygame.time.wait(500)
-
-                            for sz in range(0, BOARD_HEIGHT * BOARD_WIDTH, 5):
-                                l = coordinates[sz: sz + 5]
-                                for x in l:
-                                    revealed[x[0]][x[1]] = True
-                                    draw_square(board, revealed, *x)
-                                pygame.time.wait(500)
-                                for x in l:
-                                    revealed[x[0]][x[1]] = False
-                                    draw_square(board, revealed, *x)
 
                         # setting up board
                         def get_random_board(shape, colors):
